@@ -37,8 +37,11 @@ public final class AnotherConcurrentGUI extends JFrame {
         this.getContentPane().add(panel);
         this.setVisible(true);
 
-        Agent agent = new Agent();
+        Agent1 agent = new Agent1();
         new Thread(agent).start();
+
+        Agent2 agent2 = new Agent2();
+        new Thread(agent2).start();
 
         stop.addActionListener( (e)-> {agent.stop(); up.setEnabled(false); down.setEnabled(false);});
         down.addActionListener( (e)-> agent.down());
@@ -47,7 +50,7 @@ public final class AnotherConcurrentGUI extends JFrame {
         
     }
 
-    private class Agent implements Runnable{
+    private class Agent1 implements Runnable{
         private int counter = 0;
         private volatile boolean option; //0 represent inc ; 1 dec
         private volatile boolean stop;
@@ -81,6 +84,28 @@ public final class AnotherConcurrentGUI extends JFrame {
 
         private void down() {
             this.option = true;
+        }
+        
+    }
+
+    private class Agent2 implements Runnable{
+        int timer = 0;
+        @Override
+        public void run() {
+            while(timer<10){
+                try {
+                    timer++;
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            //il conteggio si ferma
+            up.setEnabled(false);
+            down.setEnabled(false);
+
+            
         }
         
     }
