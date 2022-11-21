@@ -74,7 +74,7 @@ public final class AnotherConcurrentGUI extends JFrame {
         }
         private void stop() {
             Agent1.stop = true;
-            
+
         }
 
         private void down() {
