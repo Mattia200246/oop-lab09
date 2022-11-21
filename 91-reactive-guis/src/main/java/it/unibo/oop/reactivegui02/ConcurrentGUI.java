@@ -22,9 +22,12 @@ public final class ConcurrentGUI extends JFrame {
     public ConcurrentGUI(){
         super();
         final JPanel panel = new JPanel();
+        panel.add(label);
+        label.setText("0");
         panel.add(up);
         panel.add(down);
         panel.add(stop);
+        
         
         this.getContentPane().add(panel);
         this.setVisible(true);
