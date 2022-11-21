@@ -53,7 +53,7 @@ public final class AnotherConcurrentGUI extends JFrame {
     private class Agent1 implements Runnable{
         private int counter = 0;
         private volatile boolean option; //0 represent inc ; 1 dec
-        private volatile boolean stop;
+        private static volatile boolean stop;
 
         @Override
         public void run() {
@@ -101,9 +101,9 @@ public final class AnotherConcurrentGUI extends JFrame {
                 }
             }
 
-            //il conteggio si ferma
             up.setEnabled(false);
             down.setEnabled(false);
+            Agent1.stop = true;
 
             
         }
