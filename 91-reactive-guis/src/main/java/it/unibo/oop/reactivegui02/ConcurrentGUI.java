@@ -39,13 +39,16 @@ public final class ConcurrentGUI extends JFrame {
 
         Agent agent = new Agent();
         new Thread(agent).start();
+
+        stop.addActionListener( (e)-> agent.stop());
     }
 
     private class Agent implements Runnable{
-        int counter = 0;
+        private int counter = 0;
+        private volatile boolean stop;
         @Override
         public void run() {
-            while(true){
+            while(!stop){
                 try {
 
                 label.setText(Integer.toString(this.counter));
@@ -56,6 +59,9 @@ public final class ConcurrentGUI extends JFrame {
                 }
 
             }
+        }
+        private void stop() {
+            this.stop = true;
         }
 
     }
