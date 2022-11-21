@@ -50,9 +50,8 @@ public final class ConcurrentGUI extends JFrame {
         public void run() {
             while(!stop){
                 try {
-
-                label.setText(Integer.toString(this.counter));
-                counter++;
+                    label.setText(Integer.toString(this.counter));
+                    counter++;
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
