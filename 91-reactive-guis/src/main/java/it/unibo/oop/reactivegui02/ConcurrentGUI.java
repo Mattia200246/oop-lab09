@@ -40,7 +40,7 @@ public final class ConcurrentGUI extends JFrame {
         Agent agent = new Agent();
         new Thread(agent).start();
 
-        stop.addActionListener( (e)-> agent.stop());
+        stop.addActionListener( (e)-> {agent.stop(); up.setEnabled(false); down.setEnabled(false);});
         down.addActionListener( (e)-> agent.down());
         up.addActionListener( (e)-> agent.up());
 
@@ -48,7 +48,7 @@ public final class ConcurrentGUI extends JFrame {
 
     private class Agent implements Runnable{
         private int counter = 0;
-        private boolean option; //0 represent inc ; 1 dec
+        private volatile boolean option; //0 represent inc ; 1 dec
         private volatile boolean stop;
         @Override
         public void run() {
@@ -72,6 +72,7 @@ public final class ConcurrentGUI extends JFrame {
         }
         private void stop() {
             this.stop = true;
+            
         }
 
         private void down() {
