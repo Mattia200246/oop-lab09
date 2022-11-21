@@ -17,4 +17,22 @@ import javax.swing.SwingUtilities;
  * Third experiment with reactive gui.
  */
 public final class AnotherConcurrentGUI extends JFrame {
+    JLabel label = new JLabel();
+    JButton up = new JButton("Up");
+    JButton down = new JButton("Down");
+    public AnotherConcurrentGUI(){
+        final JPanel panel = new JPanel();
+        panel.add(label);
+        label.setText("0");
+        panel.add(up);
+        panel.add(down);
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)dimension.getWidth();
+        int height = (int)dimension.getHeight();
+        this.setSize(width/2, height/2);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.getContentPane().add(panel);
+        this.setVisible(true);
+    }
 }
