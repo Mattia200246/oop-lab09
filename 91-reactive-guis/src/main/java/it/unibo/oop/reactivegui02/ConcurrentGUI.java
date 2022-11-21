@@ -36,6 +36,28 @@ public final class ConcurrentGUI extends JFrame {
         this.getContentPane().add(panel);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        Agent agent = new Agent();
+        new Thread(agent).start();
+    }
+
+    private class Agent implements Runnable{
+        int counter = 0;
+        @Override
+        public void run() {
+            while(true){
+                try {
+
+                label.setText(Integer.toString(this.counter));
+                counter++;
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
     }
     
 
