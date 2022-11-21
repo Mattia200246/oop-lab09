@@ -42,6 +42,7 @@ public final class ConcurrentGUI extends JFrame {
 
         stop.addActionListener( (e)-> agent.stop());
         down.addActionListener( (e)-> agent.down());
+        up.addActionListener( (e)-> agent.up());
 
     }
 
@@ -65,6 +66,9 @@ public final class ConcurrentGUI extends JFrame {
                 }
 
             }
+        }
+        public void up() {
+            this.option = false;
         }
         private void stop() {
             this.stop = true;
