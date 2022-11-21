@@ -41,17 +41,24 @@ public final class ConcurrentGUI extends JFrame {
         new Thread(agent).start();
 
         stop.addActionListener( (e)-> agent.stop());
+        down.addActionListener( (e)-> agent.down());
+
     }
 
     private class Agent implements Runnable{
         private int counter = 0;
+        private boolean option; //0 represent inc ; 1 dec
         private volatile boolean stop;
         @Override
         public void run() {
             while(!stop){
                 try {
                     label.setText(Integer.toString(this.counter));
-                    counter++;
+                        if(!option){
+                            counter++;
+                        }else{
+                            counter--;
+                        }
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -61,6 +68,10 @@ public final class ConcurrentGUI extends JFrame {
         }
         private void stop() {
             this.stop = true;
+        }
+
+        private void down() {
+            this.option = true;
         }
 
     }
