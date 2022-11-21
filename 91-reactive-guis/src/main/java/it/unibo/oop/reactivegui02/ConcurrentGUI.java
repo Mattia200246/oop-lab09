@@ -28,7 +28,11 @@ public final class ConcurrentGUI extends JFrame {
         panel.add(down);
         panel.add(stop);
         
-        
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)dimension.getWidth();
+        int height = (int)dimension.getHeight();
+
+        this.setSize(width/2, height/2);
         this.getContentPane().add(panel);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
