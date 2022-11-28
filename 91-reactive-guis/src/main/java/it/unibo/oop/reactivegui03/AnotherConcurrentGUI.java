@@ -35,7 +35,7 @@ public final class AnotherConcurrentGUI extends JFrame {
         Agent1 agent = new Agent1();
         new Thread(agent).start();
 
-        Agent2 agent2 = new Agent2();
+        Agent2 agent2 = new Agent2(agent);
         new Thread(agent2).start();
 
         stop.addActionListener( (e)-> {agent.stop(); up.setEnabled(false); down.setEnabled(false);});
@@ -48,7 +48,7 @@ public final class AnotherConcurrentGUI extends JFrame {
     private class Agent1 implements Runnable{
         private int counter = 0;
         private volatile boolean option; //0 represent inc ; 1 dec
-        private static volatile boolean stop;
+        private volatile boolean stop;
 
         @Override
         public void run() {
@@ -73,7 +73,7 @@ public final class AnotherConcurrentGUI extends JFrame {
             this.option = false;
         }
         private void stop() {
-            Agent1.stop = true;
+            this.stop = true;
 
         }
 
@@ -83,7 +83,11 @@ public final class AnotherConcurrentGUI extends JFrame {
         
     }
 
-    private class Agent2 implements Runnable{
+    private class Agent2 implements Runnable {
+        private Agent1 agent;
+        private Agent2(Agent1 agent){
+            this.agent = agent;
+        }
         int timer = 0;
         @Override
         public void run() {
@@ -98,9 +102,7 @@ public final class AnotherConcurrentGUI extends JFrame {
 
             up.setEnabled(false);
             down.setEnabled(false);
-            Agent1.stop = true;
-
-            
+            agent.stop = true;
         }
         
     }
